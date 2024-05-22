@@ -13,17 +13,19 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
 
-    private val questions = arrayOf("Pregunta1?",
-        "Pregunta2?",
-        "Pregunta3?"
+    private val questions = arrayOf(
+        "¿Cuál es la capital de Francia?",
+        "¿Cuál es el elemento químico con el símbolo 'O'?",
+        "¿En qué año llegó el hombre a la Luna?"
     )
 
-    private val options = arrayOf(arrayOf("Respuesta1", "Respuesta2", "Respuesta3"),
-        arrayOf("Respuesta1", "Respuesta2", "Respuesta3"),
-        arrayOf("Respuesta1", "Respuesta2", "Respuesta3")
+    private val options = arrayOf(
+        arrayOf("París", "Madrid", "Roma"),
+        arrayOf("Oxígeno", "Oro", "Osmio"),
+        arrayOf("1969", "1972", "1965")
     )
 
-    private val correctAnswers = arrayOf(1,0,2)
+    private val correctAnswers = arrayOf(0, 0, 0)
     private var currentQuestionIndex = 0
     private var score = 0
 
