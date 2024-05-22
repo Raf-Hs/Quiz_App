@@ -2,6 +2,7 @@ package com.example.quizapp
 
 import android.graphics.Color
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -12,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
 
-    private val question = arrayOf("Pregunta1?",
+    private val questions = arrayOf("Pregunta1?",
         "Pregunta2?",
         "Pregunta3?"
     )
@@ -61,12 +62,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun resetButtonColors (buttonIndex:Int){
-        when (buttonIndex){
-            0 -> binding.optionButton1.setBackgroundColor(Color.rgb(50,59,96))
-            1 -> binding.optionButton2.setBackgroundColor(Color.rgb(50,59,96))
-            2 -> binding.optionButton3.setBackgroundColor(Color.rgb(50,59,96))
+    private fun resetButtonColors (){
+        binding.optionButton1.setBackgroundColor(Color.rgb(50,59,96))
+        binding.optionButton2.setBackgroundColor(Color.rgb(50,59,96))
+        binding.optionButton3.setBackgroundColor(Color.rgb(50,59,96))
+    }
 
-        }
+    private fun showResults (){
+        Toast.makeText(this,"Your score : $score out of ${questions.size}", Toast.LENGTH_LONG).show()
+        binding.restartButton.isEnabled = true
+    }
+
+    private fun displayQuestion (){
+        binding.questionText.text = questions[currentQuestionIndex]
+        binding.optionButton1.text = questions[currentQuestionIndex][0].toString()
+        binding.optionButton2.text = questions[currentQuestionIndex][1].toString()
+        binding.optionButton3.text = questions[currentQuestionIndex][2].toString()
+        resetButtonColors()
     }
 }
