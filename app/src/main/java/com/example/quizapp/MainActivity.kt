@@ -14,18 +14,46 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
 
     private val questions = arrayOf(
-        "¿Cuál es la capital de Francia?",
-        "¿Cuál es el elemento químico con el símbolo 'O'?",
-        "¿En qué año llegó el hombre a la Luna?"
+        "¿Cuál es el resultado de la siguiente ecuación: 2x + 5 = 11?",
+        "¿Cuál es el valor de 'y' en la ecuación: 3y - 7 = 14?",
+        "¿Cuál es la solución de la ecuación: x^2 - 4 = 0?",
+        "¿Cuál es el resultado de la siguiente ecuación: 3(x + 2) = 15?",
+        "¿Cuál es el valor de 'a' en la ecuación: 2(a - 3) = 10?",
+        "¿Cuál es el resultado de la siguiente ecuación: 4x - 8 = 12?",
+        "¿Cuál es el valor de 'b' en la ecuación: 5b + 10 = 35?",
+        "¿Cuál es la solución de la ecuación: 2x^2 - 18 = 0?",
+        "¿Cuál es el resultado de la siguiente ecuación: 3(2y - 4) = 6?",
+        "¿Cuál es el valor de 'c' en la ecuación: 4(c + 5) = 24?"
     )
 
     private val options = arrayOf(
-        arrayOf("París", "Madrid", "Roma"),
-        arrayOf("Oxígeno", "Oro", "Osmio"),
-        arrayOf("1969", "1972", "1965")
+        arrayOf("3", "4", "5"),
+        arrayOf("7", "8", "9"),
+        arrayOf("2", "-2", "4"),
+        arrayOf("3", "4", "5"),
+        arrayOf("6", "7", "8"),
+        arrayOf("5", "6", "7"),
+        arrayOf("5", "6", "7"),
+        arrayOf("3", "4", "5"),
+        arrayOf("2", "3", "4"),
+        arrayOf("3", "4", "5")
     )
 
-    private val correctAnswers = arrayOf(0, 0, 0)
+    private val correctAnswers = arrayOf(1, 2, 1, 0, 1, 2, 1, 2, 0, 1)
+
+    private val explanations = arrayOf(
+        "Para resolver la ecuación 2x + 5 = 11, restamos 5 a ambos lados para obtener 2x = 6. Luego, dividimos por 2 para obtener x = 3.",
+        "Para resolver la ecuación 3y - 7 = 14, sumamos 7 a ambos lados para obtener 3y = 21. Finalmente, dividimos por 3 para obtener y = 7.",
+        "Para resolver la ecuación x^2 - 4 = 0, sumamos 4 a ambos lados para obtener x^2 = 4. Luego, tomamos la raíz cuadrada para obtener x = ±2.",
+        "Para resolver la ecuación 3(x + 2) = 15, primero distribuimos el 3 para obtener 3x + 6 = 15. Luego, restamos 6 a ambos lados para obtener 3x = 9, y dividimos por 3 para obtener x = 3.",
+        "Para resolver la ecuación 2(a - 3) = 10, primero distribuimos el 2 para obtener 2a - 6 = 10. Luego, sumamos 6 a ambos lados para obtener 2a = 16, y dividimos por 2 para obtener a = 8.",
+        "Para resolver la ecuación 4x - 8 = 12, sumamos 8 a ambos lados para obtener 4x = 20. Luego, dividimos por 4 para obtener x = 5.",
+        "Para resolver la ecuación 5b + 10 = 35, primero restamos 10 a ambos lados para obtener 5b = 25. Luego, dividimos por 5 para obtener b = 5.",
+        "Para resolver la ecuación 2x^2 - 18 = 0, primero sumamos 18 a ambos lados para obtener 2x^2 = 18. Luego, dividimos por 2 para obtener x^2 = 9, y tomamos la raíz cuadrada para obtener x = ±3.",
+        "Para resolver la ecuación 3(2y - 4) = 6, primero distribuimos el 3 para obtener 6y - 12 = 6. Luego, sumamos 12 a ambos lados para obtener 6y = 18, y dividimos por 6 para obtener y = 3.",
+        "Para resolver la ecuación 4(c + 5) = 24, primero distribuimos el 4 para obtener 4c + 20 = 24. Luego, restamos 20 a ambos lados para obtener 4c = 4, y dividimos por 4 para obtener c = 1."
+    )
+
     private var currentQuestionIndex = 0
     private var score = 0
 
@@ -94,6 +122,7 @@ class MainActivity : AppCompatActivity() {
         binding.optionButton2.text = options[currentQuestionIndex][1]
         binding.optionButton3.text = options[currentQuestionIndex][2]
         resetButtonColors()
+        binding.explanationText.text = ""
     }
 
     private fun checkAnswer(selectedAnswerIndex: Int) {
@@ -106,6 +135,9 @@ class MainActivity : AppCompatActivity() {
             wrongButtonColors(selectedAnswerIndex)
             correctButtonColors(correctAnswerIndex)
         }
+
+        binding.explanationText.text = explanations[currentQuestionIndex]
+
         if (currentQuestionIndex < questions.size - 1) {
             currentQuestionIndex++
             binding.questionText.postDelayed({ displayQuestion() }, 1000)
